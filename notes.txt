@@ -1,0 +1,141 @@
+
+
+creat a virtual enviroment in the working directory              :->  C:\"Program Files"\Python36\python.exe -m venv .   #my systems path to python exe
+Activate virtual enviroment that is in the dir you are in        :->  .\Scripts\activate                                 #deactivate to close it
+Install a oackage and not sure what exact version but in a range :->  pip install "Django>-3.2,<3.3"
+Open window of current directory cmd / powershell is in          :->  ii .
+Push all packages from virtual enviroment to requirements file   :->  pip freeze > requirements.txt                     #using pipenv > creates pip file
+What version of python running                                   :->  python -V
+Toggle shell in VS Code                                          :->  ctl ~
+install from requirements file                                   :->  pip install -r requirements.txt
+start django project in current directory                        :->  python -m django startproject trydjango .
+cfe link to video for notes up to this point                     :->  https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/setup-django-on-vs-code/?play=true
+
+run server from project directory ofer activate enviroment       :-> python manage.py runserver
+close out serevier                                               :-> ctrl C
+flask postgrest db uri format                                    :-> app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sohozwkc:ylgD1mPab2XzkSCTTSQcTGeDKTe7tZXi@lallah.db.elephantsql.com/sohozwkc'
+djamgo cli command line interface commands                       :-> python manage.py
+create a new componet in this case names articles                :-> python manage.py startapp articles
+every model inherits models.model                                :-> class Article(models.Model):
+how to connect postgres db                                       :-> https://stackpython.medium.com/how-to-start-django-project-with-a-database-postgresql-aaa1d74659d8
+whenyou create a " app"  or cpmpnet have to add to settings      :-> settings.py  each componet i create needs to be added here
+migrate / make migrtuons make migratuons comes first whn creating:-> python manage.py makemigrations then migrate 
+to open up project shell on server                               :-> python manage.py shell
+instead of fstring, unpack dictionary with .format method        :-> HTML_STRING="""<h1> {title} :: {content} ({id}) </h1>""".format(**content)
+
+remeber, these are just python functions and 
+returns to site are separate from the python in the fucntion.    :-> KEEP IN MIND
+
+*** not specific to project not needed for python 3.7+,          :-> pip install dataclasses
+
+to access and work with in the django enviroomnet                 :-> python manage.py shell 
+
+multiple ways to create a model object (row in table)             :-> initaiate it and pass in :obj=Article(title= "SOME TITLE"),onj.save() 
+                                                                  :->                          :obj=Article.objects.create(title="some other title"),obj.save()
+                                                                  :-> initaite it empty, asign :obj=Article(),obj.title="Title again",obj.save()                         
+
+retireve data                                                     :-> a=Article.objects.get(id=1),a.title  
+
+other way to render templates if you are rendering multiple
+strings to same template                                          :-> https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/django-templates-basics/?play=true 
+
+django url vs re_path (plain vs regex expression 
+(previous method)  for dynamic url routing                        :-> https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/dynamic-url-routing/?play=true
+
+Depending on where module is in directory import in differnt 
+ways.  If module is in same directory it is being called from,
+'.' notation only for realtive vs is it is main directory, you use 
+artilces.model                                                     :-> from .models import Article vs from articles.models import Article
+
+standard protpcol when viewing single item details, ie 1 article   :-> detail.html
+
+dynamic url routing                                                :->   path('articles/<int:id>/',views.article_detail_view), https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/dynamic-url-routing/?play=true
+can add more arguements to url, set it first then 
+make sure view can handle                                          :-> path('articles/<int:id>/<int:year>',views.article_detail_view)
+
+in admin module add model to ADMIN giving 
+access to it from admon page                                       :-> admin.site.register(Article) : https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/register-model-admin/?play=true
+
+you can add actions and urls to submit                             :-> <form action = 'https://www.google.com' >
+
+get all the attribute of a object                                  :-> dir(request))
+
+form GET method from base html or any template/ url user generated :->https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/search-form-request-data/?play=true 
+
+if seacrh or "action" from view  is outside of app, you can tell 
+django what url base to goto to        17min mark ish              :-><form action = '/articles/' method='GET'>, https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/search-form-request-data/?play=true
+
+
+compared to search fomr, '.' only forking for this one view 4:50   :-> <form actio="." method="POST">,https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/basic-html-form/?play=true
+@decorator before function, 99% do not use, instead use next listed:-> @csrf_exempt
+
+6:30  DJANGO HAS CSRF BUILT IN                                     :-> {% csrf_exempt_token %} https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/basic-html-form/?play=true
+
+alWAYS ensure get and post handle empty actions                    :->    article_obj=None, if id is not None: article_obj = Article.objects.get(id=id)
+
+creating a new "app" or component of the project                   :-> python manage.py startapp accounts
+
+when laying out templats, apps, exact                              :-> build base framework of what views you know are coming
+
+context processoors defined in settings so do not need {{ }} to 
+access them in django templates.  just {}                          :-> {% if not request.user.is_authenticated %}
+
+function decorator to ensure user is logged in                     :-> from django.contrib.auth.decorators import login_required ---> @login_required https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/creating-user-required-page/?play=true
+
+inside template, takes form and .as_p puts it in p tags            :-> {{ form.as_p }}
+django forms prevent havcnig to write out all html for form        :-> more from forms
+
+form validation walkthourh   1900 clean_'formfiled' vs clean        :-> https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/basic-django-form/?play=true
+
+
+was just building forms, now build forms based upon models          :-> https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/django-model-form-article-model/?play=true
+
+
+AuthenticationForms                                                 :-> https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/login-django-authenticationform/
+
+setting up enviroment variable starts with                          :-> from virtual enviroment :pip install django-env
+create .env file in main rot of project                             :-> create .env file and add VARIABLES from settings ans their values no "" 
+vido link enviro variable, have to restart server to take effect    :-> https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/environment-variables-dotenv/?play=true
+
+version control basics:recao at 2700                                :-> https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/managing-code-git-github/?play=true
+
+key genertion                                                       :->python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key()) 
+:-> 
+:-> 
+:-> 
+:-> :-> s
+:-> 
+:-> 
+:-> 
+:-> 
+:-> :-> 
+:-> 
+:-> 
+:-> 
+:-> 
+:-> :-> 
+:-> 
+:-> 
+:-> 
+:-> 
+:-> :-> 
+:-> 
+:-> 
+:-> 
+:-> 
+:-> :-> 
+:-> 
+:-> 
+:-> 
+:-> 
+:-> :-> 
+:-> 
+:-> 
+:-> 
+:-> 
+:-> :-> 
+:-> 
+:-> 
+:-> 
+:-> 
+:-> 
