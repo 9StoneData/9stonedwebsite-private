@@ -100,10 +100,15 @@ vido link enviro variable, have to restart server to take effect    :-> https://
 version control basics:recao at 2700                                :-> https://www.codingforentrepreneurs.com/series/try-django-3-2/videos/managing-code-git-github/?play=true
 
 key genertion                                                       :->python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key()) 
+:-> r#_447g60$_2^tl=%i8ybjh@=&4w3m(q)ed3i4$gxhswak7tcz
 :-> 
 :-> 
-:-> 
-:-> :-> s
+:-> :-> >> git init
+>> git add README.md
+>> git commit -m "first commit"
+>> git branch -M main
+>> git remote add origin https://github.com/9StoneData/9stonedwebsite-private.git
+>> git push -u origin main
 :-> 
 :-> 
 :-> 
