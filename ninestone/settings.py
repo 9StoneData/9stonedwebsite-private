@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-8h_%qs838-ni1g+9l(e)bl!#20bfyd@!nn76j9l5a$#f7(k-&l
 DEBUG = str(os.environ.get('DEBUG'))=='1'
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ.get('DJANGO_ALLOWED_HOSTS')]
 if not DEBUG:
     ALLOWED_HOSTS+=[os.environ.get('DJANGO_ALLOWED_HOSTS')]
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'storages',
 
     'home',
+    'company',
 
 ]
 
