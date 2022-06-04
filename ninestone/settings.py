@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'companies',
     'dispensaries',
+    'geos',
     'home',
     
  

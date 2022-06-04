@@ -1,4 +1,5 @@
 from django.db import models
+from geos.models import State,Zip
 
 # Create your models here.
 class Company(models.Model):
@@ -8,8 +9,8 @@ class Company(models.Model):
     google_map                      = models.CharField(max_length=400, default="tbd")
     Street                          = models.CharField(max_length=100, default="tbd")
     Town                            = models.CharField(max_length=100, default="tbd")
-    ggl_Zip                         = models.CharField(max_length=12, default="tbd")
-    State                           = models.CharField(max_length=2, default="tbd")
+    zip_code                        = models.ForeignKey(Zip,null=True, blank=True,on_delete=models.CASCADE)
+    State                           = models.ForeignKey(State,null=True, blank=True,on_delete=models.CASCADE)
     Email                           = models.CharField(max_length=100, default="tbd")
     Phone                           = models.CharField(max_length=100, default="tbd")
     Website                         = models.CharField(max_length=200, default="tbd")
@@ -24,4 +25,4 @@ class Company(models.Model):
     ggl_State                       = models.CharField(max_length=2, default="tbd")
     ggl_Website                     = models.CharField(max_length=100, default="tbd")            
     ggl_Phone                       = models.CharField(max_length=100, default="tbd")               
-    CLIENTa                          = models.CharField(max_length=10, default="tbd")  
+    CLIENT                          = models.CharField(max_length=10, default="tbd")  
