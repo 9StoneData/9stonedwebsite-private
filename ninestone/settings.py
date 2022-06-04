@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     
     'storages',
 
+    'companies',
+    'dispensaries',
     'home',
-    'company',
+    
+ 
 
 ]
 
