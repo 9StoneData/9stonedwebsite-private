@@ -41,8 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
-    #'django_plotly_dash.apps.DjangoPlotlyDashConfig',
-    #'channels',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'dpd_static_support',
+    'bootstrap4',
+    'channels',
+    'channels_redis',
+
     'storages',
     'companies',
     'dispensaries',
@@ -52,7 +56,7 @@ INSTALLED_APPS = [
 
 ]
 # ###
-# X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 # ###
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,9 +65,11 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'django_plotly_dash.middleware.BaseMiddleware',
-    #'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_plotly_dash.middleware.BaseMiddleware',
+    'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
+    'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'ninestone.urls'
@@ -86,17 +92,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ninestone.wsgi.application'
 
-# ###
-# ASGI_APPLICATION = 'ninestone.routing.application'
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#         'CONFIG': {
-#             'hosts': [('127.0.0.1', 6379),],
-#         }
-#     }
-# }
-# ###
+###
+ASGI_APPLICATION = 'ninestone.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379),],
+        }
+    }
+}
+###
 
 
 # Database
@@ -172,25 +178,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# ###
-# STATICFILES_FINDERS = [
-#     'django.contrib.staticfiles.finders.FileSystemFinder',
-#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#     'django_plotly_dash.finders.DashAssetFinder',
-#     'django_plotly_dash.finders.DashComponentFinder'
-# ]
-# ###
 ###
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder'
+]
+###
+##
 
-# PLOTLY_COMPONENTS = [
+PLOTLY_COMPONENTS = [
 
-#     'dash_core_components',
-#     'dash_html_components',
-#     'dash_renderer',
+    'dash_core_components',
+    'dash_html_components',
+    'dash_renderer',
 
-#     'dpd_components',
-# ]
-# ###
+    'dpd_components',
+    'dpd_static_support',
+]
+###
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [ os.path.join(BASE_DIR,'static'), ]
 STATIC_ROOT =os.path.join(BASE_DIR ,"staticfiles-cdn")
