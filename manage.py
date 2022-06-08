@@ -5,7 +5,7 @@ import sys
 from decouple import config
 
 def main():
-    """Run administrative tasks."""
+    """Run administrativetasks."""
  
     os.environ.setdefault('DJANGO_SETTINGS_MODULE',  f'{config("PROJECT_NAME")}.settings')
     try:
