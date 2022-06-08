@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from home.views import home
-
+from companies.views import companies
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +24,6 @@ urlpatterns = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    path('companies/', include('companies.urls')),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]

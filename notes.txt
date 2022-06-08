@@ -112,10 +112,24 @@ key genertion                                                       :->python -c
 :-> 
 :-> 
 :-> 
+
+username = default
+password = AVNS_K5JAJMN1kdw_pyG
+host = db-redis-nyc3-89265-do-user-11682607-0.b.db.ondigitalocean.com
+port = 25061
+
+rediss://default:AVNS_K5JAJMN1kdw_pyG@private-db-redis-nyc3-89265-do-user-11682607-0.b.db.ondigitalocean.com:25061
+
+https://michaelchen.io/blog/deploying-django-channels-on-digitalocean-app-platform
+https://www.youtube.com/watch?v=14zdpWW6eqw
+
 :-> 
 :-> :-> 
 :-> 
 :-> 
+
+root@ubuntu-s-1vcpu-1gb-nyc1-01:~# : 9Stone2020$
+info@9stonedata.com e%QR2XF6 
 :-> 
 :-> 
 :-> :-> 

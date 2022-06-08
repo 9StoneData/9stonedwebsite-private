@@ -68,8 +68,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_plotly_dash.middleware.BaseMiddleware',
     'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
-    'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
-
+   
 ]
 
 ROOT_URLCONF = 'ninestone.urls'
