@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,15 +22,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8h_%qs838-ni1g+9l(e)bl!#20bfyd@!nn76j9l5a$#f7(k-&l'
+SECRET_KEY = config("SECRET_KEY")
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+ALLOWED_HOSTS = ["204.48.16.65",".9stonedata.com","localhost"]
+
+ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
+
+WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
+
+ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get('DEBUG'))=='1'
-
-
-ALLOWED_HOSTS = []
-if not DEBUG:
-    ALLOWED_HOSTS+=[os.environ.get('DJANGO_ALLOWED_HOST')]
 
 # Application definition
 
@@ -71,7 +75,6 @@ MIDDLEWARE = [
    
 ]
 
-ROOT_URLCONF = 'ninestone.urls'
 
 TEMPLATES = [
     {
@@ -89,10 +92,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ninestone.wsgi.application'
+
 
 ###
-ASGI_APPLICATION = 'ninestone.routing.application'
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -115,11 +118,11 @@ CHANNEL_LAYERS = {
 # }
 
 
-POSTGRES_DB = os.environ.get("POSTGRES_DB")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-POSTGRES_USER = os.environ.get("POSTGRES_USER")
-POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
-POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
+POSTGRES_DB = config("POSTGRES_DB")
+POSTGRES_PASSWORD = config("POSTGRES_PASSWORD")
+POSTGRES_USER = config("POSTGRES_USER")
+POSTGRES_HOST = config("POSTGRES_HOST")
+POSTGRES_PORT = config("POSTGRES_PORT")
 
 POSTGRES_READY = (
     POSTGRES_DB is not None
@@ -199,20 +202,40 @@ PLOTLY_COMPONENTS = [
 ###
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [ os.path.join(BASE_DIR,'static'), ]
-STATIC_ROOT =os.path.join(BASE_DIR ,"staticfiles-cdn")
+#STATIC_ROOT =os.path.join(BASE_DIR ,"staticfiles-cdn")
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+TEMP = os.path.join(BASE_DIR, 'temp')
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = '9Stone Team <noreply@9stonedata.com>'
+
+
+BASE_URL = "http://204.48.16.65"
+
+
+
+
 
 MEDIA_URL = 'mediafiles/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'staticfiles-cdn/media')
 
 
-from .cdn.conf import ( AWS_ACCESS_KEY_ID,
-                        AWS_SECRET_ACCESS_KEY,
-                        AWS_STORAGE_BUCKET_NAME,
-                        AWS_S3_ENDPOINT_URL,
-                        AWS_S3_OBJECT_PARAMETERS,
-                        AWS_LOCATION,
-                        STATICFILES_STORAGE,
-                        DEFAULT_FILE_STORAGE)
+AWS_ACCESS_KEY_ID       = config(AWS_ACCESS_KEY_ID )
+AWS_SECRET_ACCESS_KEY   = config(AWS_SECRET_ACCESS_KEY)
+AWS_STORAGE_BUCKET_NAME = config(AWS_STORAGE_BUCKET_NAME)
+AWS_S3_ENDPOINT_URL     = config(AWS_S3_ENDPOINT_URL)
+AWS_S3_OBJECT_PARAMETERS= config(AWS_S3_OBJECT_PARAMETERS)
+AWS_LOCATION            = config(WS_LOCATION)
+STATICFILES_STORAGE     = config(STATICFILES_STORAGE)
+DEFAULT_FILE_STORAGE    = config(DEFAULT_FILE_STORAGE)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

@@ -2,12 +2,12 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import dotenv
+from decouple import config
 
 def main():
     """Run administrative tasks."""
     dotenv.read_dotenv()
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ninestone.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE',  f'{config("PROJECT_NAME")}.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
